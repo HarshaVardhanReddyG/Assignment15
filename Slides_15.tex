@@ -1,0 +1,168 @@
+\documentclass{beamer}
+\usetheme{CambridgeUS}
+
+\setbeamertemplate{caption}[numbered]{}
+
+\usepackage{enumitem}
+\usepackage{tfrupee}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{textcomp, gensymb}
+\usepackage{graphicx}
+\usepackage{txfonts}
+
+\def\inputGnumericTable{}
+
+\usepackage[latin1]{inputenc}                                 
+\usepackage{color}                                            
+\usepackage{array}                                            
+\usepackage{longtable}                                        
+\usepackage{calc}                                             
+\usepackage{multirow}                                         
+\usepackage{hhline}                                           
+\usepackage{ifthen}
+\usepackage{caption} 
+\providecommand{\mbf}{\mathbf}
+\providecommand{\qfunc}[1]{\ensuremath{Q\left(#1\right)}}
+\providecommand{\sbrak}[1]{\ensuremath{{}\left[#1\right]}}
+\providecommand{\lsbrak}[1]{\ensuremath{{}\left[#1\right.}}
+\providecommand{\rsbrak}[1]{\ensuremath{{}\left.#1\right]}}
+\providecommand{\brak}[1]{\ensuremath{\left(#1\right)}}
+\providecommand{\lbrak}[1]{\ensuremath{\left(#1\right.}}
+\providecommand{\rbrak}[1]{\ensuremath{\left.#1\right)}}
+\providecommand{\cbrak}[1]{\ensuremath{\left\{#1\right\}}}
+\providecommand{\lcbrak}[1]{\ensuremath{\left\{#1\right.}}
+\providecommand{\rcbrak}[1]{\ensuremath{\left.#1\right\}}}                                  
+                               
+\title{Assignment 15}
+\author[CS21BTECH11017]{G HARSHA VARDHAN REDDY ( CS21BTECH11017 )}
+\date{\today}
+\logo{\large{AI1110}}
+
+
+\begin{document}
+% Title page frame
+\begin{frame}
+    \titlepage 
+\end{frame}
+
+% Remove logo from the next slides
+\logo{}
+
+
+% Outline frame
+\begin{frame}{Outline}
+    \tableofcontents
+\end{frame}
+
+%Question
+\section{Problem Statement}
+\begin{frame}{Problem Statement}
+    \begin{block} {Papoulis Pillai Probability Random Variables and Stochastic Processes\\ 
+    Exercise : 12-11}
+    We wish to estimate the mean $\eta$ of a process $x(t) =\eta + v(t)$, where $R_{vv}(\tau) = 5\delta(\tau)$. Find the $0.95$ confidence interval of $\eta$ $?$ 
+    \end{block}
+\end{frame}
+\section{Definitions}
+\begin{frame}{Definitions}
+    %\begin{block}{Auto-correlation function}
+        %If $\{X_t\}$ is a \textbf{wide-sense stationary process} then the mean $\mu$  and the variance $\sigma ^{2}$ are time-independent.\\
+    %and further the autocovariance function depends only on the lag between $t_{1}$ and $t_{2}$.\\
+    %The autocovariance depends only on the time-distance between %the pair of values but not on their position in time.\\
+    %The auto-correlation can be expressed as a function of the time-lag, and that this would be an even function of the lag $\{\tau =t_{2}-t_{1}\}$. This gives the more familiar forms for the auto-correlation function.
+    %\begin{align}
+    %   R_{XX}(t) &=E\left[X_{t+\tau}\Bar{X_t}\right]
+    %\end{align}
+    %\end{block}
+    \begin{block}{Mean-Ergodic Processes}
+The process is said to be mean ergodic if its time average $\eta_T$ tends
+to the ensemble average $\eta$ as $T \to \infty$. 
+    \end{block}
+    \begin{block}{Auto covariance}
+    For a stationary process,
+    \begin{align}
+        C(\tau) &= \frac{1}{2T}\int^{2T}_{-2T}C(\tau -\alpha)\left( 1-\frac{|\alpha|}{2T}\right)d\alpha \label{a}\\
+    \end{align}
+    Where,\\
+    $C(\tau)$ is auto covariance of $x(t)$ 
+    \end{block}
+\end{frame}
+
+\begin{frame}{Variance}
+    We know that for a mean ergodic process
+    \begin{align}
+        \sigma_T^2&=C(0) \text{ and }\\
+        C(\alpha) &=C(-\alpha)
+    \end{align}
+From \eqref{a},
+\begin{align}
+    \sigma_T^2=C(0)&= \frac{1}{2T}\int^{2T}_{-2T}C(\alpha)\left( 1-\frac{|\alpha|}{2T}\right)d\alpha\\
+    \implies  \sigma_T^2&= \frac{1}{T}\int^{2T}_{0}C(\alpha)\left( 1-\frac{\alpha}{2T}\right)d\alpha
+\end{align}
+\end{frame}
+\section{Solution}
+\begin{frame}{Solution}
+Given,\\
+\begin{align}
+    x(t) &= \eta +v(t)
+\end{align}
+Here,\\
+$x(t)$ is mean ergodic process.\\
+$v(t)$ is white noise with $R_{vv}(\tau)=5\delta(\tau)$\\
+$C(\tau) = R_{vv}(\tau)$\\
+As,
+\begin{align}
+    \sigma_{T}^2 &= \frac{1}{2T}\int_{-2T}^{2T} C(\alpha)\left(1-\frac{\alpha}{2T}\right)d\alpha
+\end{align}
+Therefore,\\
+\begin{align}
+    \sigma_T^2 &= \frac{1}{2T}\int_{-2T}^{2T} 5\delta(\tau)\left(1-\frac{\tau}{2T}\right)d\tau 
+     =\frac{5}{2T}
+\end{align}
+\end{frame}
+\begin{frame}{}
+Therefore,
+\begin{align}
+    \sigma_T^2 &=\frac{5}{2T}
+\end{align}
+We have to find $\epsilon$ such that 
+\begin{align}
+    Pr(\eta - \varepsilon \leq \eta_T \leq \eta + \varepsilon) &= 0.95 \label{6}\\
+    \implies Pr(|\eta_T-\varepsilon|\leq \eta) &= 0.95 \label{7}
+\end{align}
+As
+\begin{align}
+    Pr(|\eta_T-\varepsilon|\geq \eta) &= \int_{-\infty}^{-\eta-\varepsilon}f(x)dx+\int_{\eta + \varepsilon}^\infty f(x)dx \text{ and }\\
+    \sigma_T^2 &= \int_{-\infty}^\infty (x-\eta)^2f(x)dx\\
+    &\geq \int_{|\eta_T-\varepsilon|\geq \eta}(x-\eta)^2f(x)dx\\
+    &\geq \varepsilon^2\int_{|\eta_T-\varepsilon|\geq \eta}f(x)dx
+\end{align}
+\end{frame}
+\begin{frame}{}
+    Therefore,
+    \begin{align}
+        \sigma_T^2 &\geq \varepsilon^2 \times Pr(|\eta_T-\varepsilon|\geq \eta)\\
+        \implies Pr(|\eta_T-\varepsilon|\geq \eta) &\leq \frac{\sigma_T^2}{ \varepsilon^2} \label{13}
+    \end{align} 
+
+    From \eqref{7} and \eqref{13},
+    \begin{align}
+        Pr(|\eta_T-\varepsilon|\geq \eta) &= 1-0.95 \leq\frac{\sigma_T^2}{ \varepsilon^2} \\
+        \implies\varepsilon^2 &\leq\frac{\sigma_T^2}{0.05}\label{eq}
+    \end{align}
+    Substituting $\sigma_T^2$ in \eqref{eq}
+    \begin{align}
+        \varepsilon^2 &\leq\frac{5}{2T\times 0.05}
+    \end{align}
+\end{frame}
+
+\begin{frame}{}
+    As $\varepsilon>0$
+    \begin{align}
+        \varepsilon^2 &\leq\frac{5}{2T\times 0.05}\\
+        &\leq \frac{50}{T}\\
+        \implies \varepsilon &\leq \sqrt{\frac{50}{T}}
+    \end{align}
+Therefore, $Pr(\eta - \varepsilon \leq \eta_T \leq \eta + \varepsilon) = 0.95 \implies \varepsilon \leq \sqrt{\frac{50}{T}}$
+\end{frame}
+\end{document}
